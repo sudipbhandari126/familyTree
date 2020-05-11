@@ -28,7 +28,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-application {
-    // Define the main class for the application.
-    mainClassName = 'com.sudip.familytree.App'
+mainClassName = 'com.sudip.familytree.App'
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.sudip.familytree.App'
+        )
+    }
 }
+
