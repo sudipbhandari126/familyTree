@@ -24,6 +24,12 @@ public class RelationshipFlow {
                 .filter(each -> each.getGender().equals(Gender.FEMALE))
                 .filter(each->!each.equals(person.getMother()))
                 .findAny().get();
+        RelationShip sonRelationship = person -> person.getChildren().stream()
+                .filter(each->each.getGender().equals(Gender.MALE))
+                .findAny().get();
+        RelationShip daughterRelationShip = person -> person.getChildren().stream()
+                .filter(each->each.getGender().equals(Gender.FEMALE))
+                .findAny().get();
 
 
 
@@ -33,6 +39,8 @@ public class RelationshipFlow {
         relationShipMap.put("sister", sisterRelationShip);
         relationShipMap.put("brother", brotherRelationship);
         relationShipMap.put("Maternal-Aunt",maternalAuntRelationship);
+        relationShipMap.put("son",sonRelationship);
+        relationShipMap.put("daughter",daughterRelationShip);
 
 
 

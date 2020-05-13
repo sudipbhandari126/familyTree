@@ -53,4 +53,20 @@ public class PersonServiceTest {
         assert relationshipFlow.findByRelation(bibek,"Maternal-Aunt").equals(bhawana);
     }
 
+    @Test
+    public void barshaIsDaughterOfSita(){
+        Person barsha = personService.get("barsha");
+        Person sita = personService.get("sita");
+        assert relationshipFlow.findByRelation(sita,"daughter").equals(barsha);
+
+    }
+
+    @Test
+    public void bibekIsSonOfSita(){
+        Person bibek = personService.get("bibek");
+        Person sita = personService.get("sita");
+        assert relationshipFlow.findByRelation(sita,"son").equals(bibek);
+
+    }
+
 }
