@@ -16,11 +16,11 @@ public class RelationshipFlow {
 
         relationShipMap.put("sister", person -> person.getMother().getChildren().stream()
                 .filter(each->each.getGender().equals(Gender.FEMALE))
-                .findFirst().get());
+                .findAny().get());
 
         relationShipMap.put("brother", person -> person.getMother().getChildren().stream()
                 .filter(each->each.getGender().equals(Gender.MALE))
-                .findFirst().get());
+                .findAny().get());
     }
 
 
