@@ -1,17 +1,22 @@
 package com.sudip.familytree.service;
 
 import com.sudip.familytree.entities.Person;
+import com.sudip.familytree.process.RelationshipFlow;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.management.relation.Relation;
 import java.util.Arrays;
 import java.util.List;
 
 public class PersonServiceTest {
     PersonService personService;
 
+    RelationshipFlow relationshipFlow;
+
     @Before
     public void init(){
+        relationshipFlow = new RelationshipFlow();
         personService = new PersonService();
         personService.addChild("laxmi","sita","Female");
         personService.addChild("sita","barsha","Female");
@@ -28,6 +33,13 @@ public class PersonServiceTest {
          assert  personService.get("barsha").getMother()
                  .getChildren()
                  .containsAll(Arrays.asList(personService.get("barsha"),personService.get("bibek")));
+    }
+
+    @Test
+    public void barshaIsSisterOfBibek(){
+        Person barsha = personService.get("barsha");
+        Person bibek = personService.get("bibek");
+        relationshipFlow.findByRelation(barsha,"brother").equals(bibek);
     }
 
 }
