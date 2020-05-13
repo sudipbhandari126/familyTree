@@ -5,3 +5,4 @@ ADD_CHILD laxmi krisha Male
 GET_RELATIONSHIP laxmi daughter
 GET_RELATIONSHIP barsha brother
 GET_RELATIONSHIP laxmi son
+GET_RELATIONSHIP rame mother

@@ -45,9 +45,10 @@ public class PersonService {
         return relationShip.fetchRelation(person);
     }
 
-    public Person findByRelation(String personName, String relationship){
+    public String findByRelation(String personName, String relationship){
         Person person = personPersistenceProvider.get(personName);
+        if (Objects.isNull(person)) return "PERSON_NOT_FOUND";
         RelationShip relationShip = relationShipMap.get(relationship.toLowerCase());
-        return relationShip.fetchRelation(person);
+        return relationShip.fetchRelation(person).getName();
     }
 }
