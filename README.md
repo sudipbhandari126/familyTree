@@ -14,10 +14,12 @@ ADD_CHILD laxmi sita Female
 ADD_CHILD sita barsha Female
 ADD_CHILD sita bibek Male
 ADD_CHILD laxmi krisha Male
+ADD_CHILD laxmi bhawana Female
 GET_RELATIONSHIP laxmi daughter
 GET_RELATIONSHIP barsha brother
 GET_RELATIONSHIP laxmi son
 GET_RELATIONSHIP rame mother
+GET_RELATIONSHIP barsha Maternal-Aunt
 ```
 
 ### Sample output
@@ -30,4 +32,5 @@ sita
 bibek
 krisha
 PERSON_NOT_FOUND
+bhawana
 ```
