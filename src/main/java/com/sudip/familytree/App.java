@@ -13,18 +13,20 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println("hi");
-        loadSample();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter family command");
+        while (scanner.hasNextLine()){
+            String s = scanner.nextLine();
 
+            System.out.println(s);
+            s = scanner.nextLine();
+            if ("exit".equals(s)) break;
+
+        }
 
 
     }
 
-    private static void loadSample(){
-
-
-
-    }
 
 
 }
