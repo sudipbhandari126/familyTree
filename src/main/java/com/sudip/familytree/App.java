@@ -14,8 +14,13 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println("hi");
-        Person person = Person.PersonBuilder.newPerson()
-                .build();
+        loadSample();
+
+
+
+    }
+
+    private static void loadSample(){
 
 
 

@@ -1,82 +1,81 @@
 package com.sudip.familytree.entities;
 
+import com.sudip.familytree.enums.Gender;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
     private String name;
     private Person husband;
     private Person wife;
-    private String gender;
-    private List<Person> children;
+    private Gender gender;
+    private List<Person> children=new ArrayList<>();
     private Person father;
     private Person mother;
 
-    private Person(PersonBuilder personBuilder){
-        this.name=personBuilder.name;
-        this.husband=personBuilder.husband;
-        this.wife=personBuilder.wife;
-        this.gender=personBuilder.gender;
-        this.children=personBuilder.children;
-        this.father=personBuilder.father;
-        this.mother=personBuilder.mother;
+    public String getName() {
+        return name;
+    }
+
+    public Person getHusband() {
+        return husband;
+    }
+
+    public Person getWife() {
+        return wife;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public List<Person> getChildren() {
+        return children;
+    }
+
+    public Person getFather() {
+        return father;
+    }
+
+    public Person getMother() {
+        return mother;
     }
 
 
 
+    public Person(String name, Gender gender) {
+        this.name = name;
+        this.gender = gender;
+    }
 
-    public static class PersonBuilder{
-        private String name;
-        private Person husband;
-        private Person wife;
-        private String gender;
-        private List<Person> children;
-        private Person father;
-        private Person mother;
+    private void setHusband(Person husband) {
+        this.husband = husband;
+    }
 
+    private void setWife(Person wife) {
+        this.wife = wife;
+    }
 
-        public static PersonBuilder newPerson()
-        {
-            return new PersonBuilder();
+    public void setSpouse(Person spouse){
+        if (Gender.MALE.equals(this.gender)){
+            setWife(spouse);
+            spouse.setHusband(this);
+        }else {
+            setHusband(spouse);
+            spouse.setWife(this);
         }
-
-        private PersonBuilder() {}
-
-        public PersonBuilder setName(String name){
-            this.name=name;
-            return this;
-        }
+    }
 
 
-        public PersonBuilder setHusband(Person husband){
-            this.husband=husband;
-            return this;
-        }
+    public void linkToFather(Person father) {
+        this.father = father;
+        father.getChildren().add(this);
+    }
 
-
-        public PersonBuilder setFather(Person father){
-            this.father=father;
-            return this;
-        }
-
-        public PersonBuilder setMother(Person mother){
-            this.mother=mother;
-            return this;
-        }
-
-        public PersonBuilder setChildren(List<Person> children){
-            this.children=children;
-            return this;
-        }
-
-        public PersonBuilder setGender(String gender){
-            this.gender=gender;
-            return this;
-        }
-
-
-        public Person build(){
-            return new Person(this);
-        }
+    public void linkToMother(Person mother) {
+        this.mother = mother;
+        mother.getChildren().add(this);
     }
 
     @Override
