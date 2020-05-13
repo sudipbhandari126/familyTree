@@ -80,7 +80,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "person: "+this.name;
+        return this.name;
     }
 }
 

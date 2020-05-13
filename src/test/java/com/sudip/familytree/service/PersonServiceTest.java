@@ -5,9 +5,7 @@ import com.sudip.familytree.process.RelationshipFlow;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.management.relation.Relation;
 import java.util.Arrays;
-import java.util.List;
 
 public class PersonServiceTest {
     PersonService personService;
@@ -40,7 +38,7 @@ public class PersonServiceTest {
     public void barshaIsSisterOfBibek(){
         Person barsha = personService.get("barsha");
         Person bibek = personService.get("bibek");
-        relationshipFlow.findByRelation(barsha,"brother").equals(bibek);
+        personService.findByRelation(barsha,"brother").equals(bibek);
     }
 
     @Test
@@ -49,15 +47,15 @@ public class PersonServiceTest {
         Person barsha = personService.get("barsha");
         Person bibek = personService.get("bibek");
 
-        assert relationshipFlow.findByRelation(barsha,"Maternal-Aunt").equals(bhawana);
-        assert relationshipFlow.findByRelation(bibek,"Maternal-Aunt").equals(bhawana);
+        assert personService.findByRelation(barsha,"Maternal-Aunt").equals(bhawana);
+        assert personService.findByRelation(bibek,"Maternal-Aunt").equals(bhawana);
     }
 
     @Test
     public void barshaIsDaughterOfSita(){
         Person barsha = personService.get("barsha");
         Person sita = personService.get("sita");
-        assert relationshipFlow.findByRelation(sita,"daughter").equals(barsha);
+        assert personService.findByRelation(sita,"daughter").equals(barsha);
 
     }
 
@@ -65,8 +63,13 @@ public class PersonServiceTest {
     public void bibekIsSonOfSita(){
         Person bibek = personService.get("bibek");
         Person sita = personService.get("sita");
-        assert relationshipFlow.findByRelation(sita,"son").equals(bibek);
+        assert personService.findByRelation(sita,"son").equals(bibek);
+    }
 
+    @Test
+    public void maleCannotHaveChildAdded(){
+        String response = personService.addChild("bibek", "ram", "Male");
+        assert response.equals("CHILD_ADDITION_FAILED");
     }
 
 }

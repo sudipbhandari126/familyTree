@@ -1,0 +1,7 @@
+ADD_CHILD laxmi sita Female
+ADD_CHILD sita barsha Female
+ADD_CHILD sita bibek Male
+ADD_CHILD laxmi krisha Male
+GET_RELATIONSHIP laxmi daughter
+GET_RELATIONSHIP barsha brother
+GET_RELATIONSHIP laxmi son

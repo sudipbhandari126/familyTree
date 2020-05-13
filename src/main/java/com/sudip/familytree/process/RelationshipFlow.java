@@ -47,10 +47,7 @@ public class RelationshipFlow {
 
     }
 
-
-    public Person findByRelation(Person person, String relationship){
-        RelationShip relationShip = relationShipMap.get(relationship);
-        return relationShip.fetchRelation(person);
+    public Map<String, RelationShip> getRelationShipMap() {
+        return relationShipMap;
     }
-
 }
