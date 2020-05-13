@@ -11,16 +11,32 @@ public class RelationshipFlow {
 
     public RelationshipFlow(){
         relationShipMap = new HashMap<>();
-        relationShipMap.put("father",person->person.getFather());
-        relationShipMap.put("mother",person -> person.getMother());
+        RelationShip fatherRelationShip = person -> person.getFather();
+        RelationShip motherRelationship = person -> person.getMother();
+        RelationShip sisterRelationShip = person -> person.getMother().getChildren().stream()
+                .filter(each -> each.getGender().equals(Gender.FEMALE))
+                .findAny().get();
+        RelationShip brotherRelationship = person -> person.getMother().getChildren().stream()
+                .filter(each -> each.getGender().equals(Gender.MALE))
+                .findAny().get();
+        RelationShip maternalAuntRelationship = person -> person.getMother().getMother()
+                .getChildren().stream()
+                .filter(each -> each.getGender().equals(Gender.FEMALE))
+                .filter(each->!each.equals(person.getMother()))
+                .findAny().get();
 
-        relationShipMap.put("sister", person -> person.getMother().getChildren().stream()
-                .filter(each->each.getGender().equals(Gender.FEMALE))
-                .findAny().get());
 
-        relationShipMap.put("brother", person -> person.getMother().getChildren().stream()
-                .filter(each->each.getGender().equals(Gender.MALE))
-                .findAny().get());
+
+
+        relationShipMap.put("father", fatherRelationShip);
+        relationShipMap.put("mother", motherRelationship);
+        relationShipMap.put("sister", sisterRelationShip);
+        relationShipMap.put("brother", brotherRelationship);
+        relationShipMap.put("Maternal-Aunt",maternalAuntRelationship);
+
+
+
+
     }
 
 
