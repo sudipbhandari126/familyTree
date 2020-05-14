@@ -15,6 +15,7 @@ public class App {
 
     public static void main(String[] args) {
         PersonService personService = new PersonService();
+        personService.loadFamilyTree();
 
         String fileName = args[0];
 

@@ -57,4 +57,53 @@ public class PersonService {
         }
         return name;
     }
+
+    private String addCouple(String maleName,String femaleName){
+        Person maleGuy = personPersistenceProvider.get(maleName);
+        if (Objects.isNull(maleGuy)) maleGuy = new Person(maleName, Gender.MALE);
+        Person femaleGal = personPersistenceProvider.get(femaleName);
+        if (Objects.isNull(femaleGal)) femaleGal = new Person(femaleName, Gender.FEMALE);
+        maleGuy.setSpouse(femaleGal);
+        return "COUPLE_ADDITION_SUCCEEDED";
+    }
+
+    public void loadFamilyTree(){
+        //Generation 1
+        addCouple("King Shan","Queen Anga");
+
+        //Generation 2
+        addCouple("Chit","Amba");
+        addChild("Queen Anga","chit","Male");
+        addChild("Queen Anga","Ish","Male");
+        addCouple("Vich","Lika");
+        addChild("Queen Anga","Vich","Male");
+        addCouple("Aras","Chitra");
+        addChild("Queen Anga","Aras","Male");
+        addCouple("Vyan","Satya");
+        addChild("Queen Anga","Satya","Female");
+
+        //Generation 3
+        addCouple("Jaya","Dritha");
+        addChild("Amba","Dritha","Female");
+        addChild("Amba","Tritha","Female");
+        addChild("Amba","Vritha","Male");
+        addChild("Lika","Vila","Female");
+        addChild("Lika","Chika","Female");
+        addCouple("Arit","Jnki");
+        addChild("Chitra","Jnki","Female");
+        addChild("Chitra","Ahit","Male");
+        addCouple("Asva","Satvy");
+        addChild("Satya","Satvy","Female");
+        addCouple("Vyas","Krpi");
+        addChild("Satya","Vyas","Male");
+        addChild("Satya","Atya","Female");
+
+        //GEneration 4
+        addChild("Dritha","Yodhan","Male");
+        addChild("Jnki","Laki","Male");
+        addChild("Jnki","Lavnya","Female");
+        addChild("Satvy","Vasa","Male");
+        addChild("Krpi","Kriya","Male");
+        addChild("Krpi","Krithi","Female");
+    }
 }
