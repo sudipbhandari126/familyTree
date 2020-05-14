@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 public class PaternalUncleRelationship implements RelationShip {
     @Override
     public List<Person> fetchRelation(Person person) {
-        return  person.getFather()
+        return  person.getFather().getFather()
                 .getChildren()
                 .stream()
                 .filter(each->each.getGender().equals(Gender.MALE))
-                .filter(each->!each.equals(person))
+                .filter(each->!each.equals(person.getFather()))
                 .collect(Collectors.toList());
     }
 }
