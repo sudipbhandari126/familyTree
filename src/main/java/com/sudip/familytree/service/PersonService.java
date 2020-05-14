@@ -49,6 +49,12 @@ public class PersonService {
         Person person = personPersistenceProvider.get(personName);
         if (Objects.isNull(person)) return "PERSON_NOT_FOUND";
         RelationShip relationShip = relationShipMap.get(relationship);
-        return relationShip.fetchRelation(person).getName();
+        String name="NONE";
+        try {
+            name = relationShip.fetchRelation(person).getName();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 }
