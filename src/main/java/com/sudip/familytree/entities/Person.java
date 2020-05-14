@@ -10,7 +10,7 @@ public class Person {
     private Person husband;
     private Person wife;
     private Gender gender;
-    private List<Person> children=new ArrayList<>();
+    private List<Person> children;
     private Person father;
     private Person mother;
 
@@ -47,6 +47,7 @@ public class Person {
     public Person(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
+        children = new ArrayList<>();
     }
 
     private void setHusband(Person husband) {
@@ -76,6 +77,14 @@ public class Person {
     public void linkToMother(Person mother) {
         this.mother = mother;
         mother.getChildren().add(this);
+    }
+
+    public boolean isMale(){
+        return Gender.MALE.equals(this.gender);
+    }
+
+    public boolean isFemale(){
+        return Gender.FEMALE.equals(this.gender);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.sudip.familytree.enums.Gender;
 import com.sudip.familytree.process.RelationShip;
 import com.sudip.familytree.process.RelationshipFlow;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -25,13 +26,15 @@ public class PersonService {
 
     public String addChild(String motherName, String childName, String childGender){
         Person mother = personPersistenceProvider.get(motherName);
-        if (Objects.isNull(mother)){
-            mother = new Person(motherName, Gender.FEMALE);
-            personPersistenceProvider.save(mother);
-        }
+        if (Objects.isNull(mother)) return "PERSON_NOT_FOUND";
         if (mother.getGender().equals(Gender.MALE)) return "CHILD_ADDITION_FAILED";
-        Person child = new Person(childName, Gender.genderOf(childGender));
+        Person child = personPersistenceProvider.get(childName);
+                if (Objects.isNull(child)){
+                child = new Person(childName, Gender.genderOf(childGender));
+                }
         child.linkToMother(mother);
+        child.linkToFather(mother.getHusband());
+        personPersistenceProvider.save(mother);
         personPersistenceProvider.save(child);
         return "CHILD_ADDITION_SUCCEEDED";
     }
@@ -40,7 +43,7 @@ public class PersonService {
         return personPersistenceProvider.get(name);
     }
 
-    public Person findByRelation(Person person, String relationship){
+    public List<Person> findByRelation(Person person, String relationship){
         RelationShip relationShip = relationShipMap.get(relationship);
         return relationShip.fetchRelation(person);
     }
@@ -49,14 +52,10 @@ public class PersonService {
         Person person = personPersistenceProvider.get(personName);
         if (Objects.isNull(person)) return "PERSON_NOT_FOUND";
         RelationShip relationShip = relationShipMap.get(relationship);
-        String name="NONE";
-        try {
-            name = relationShip.fetchRelation(person).getName();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return name;
+        List<Person> people = relationShip.fetchRelation(person);
+        return relationShip.generateNames(people);
     }
+
 
     private String addCouple(String maleName,String femaleName){
         Person maleGuy = personPersistenceProvider.get(maleName);
@@ -64,6 +63,8 @@ public class PersonService {
         Person femaleGal = personPersistenceProvider.get(femaleName);
         if (Objects.isNull(femaleGal)) femaleGal = new Person(femaleName, Gender.FEMALE);
         maleGuy.setSpouse(femaleGal);
+        personPersistenceProvider.save(maleGuy);
+        personPersistenceProvider.save(femaleGal);
         return "COUPLE_ADDITION_SUCCEEDED";
     }
 
@@ -93,7 +94,7 @@ public class PersonService {
         addChild("Chitra","Jnki","Female");
         addChild("Chitra","Ahit","Male");
         addCouple("Asva","Satvy");
-        addChild("Satya","Satvy","Female");
+        addChild("Satya","Asva","Male");
         addCouple("Vyas","Krpi");
         addChild("Satya","Vyas","Male");
         addChild("Satya","Atya","Female");
