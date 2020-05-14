@@ -8,3 +8,7 @@ GET_RELATIONSHIP barsha brother
 GET_RELATIONSHIP laxmi son
 GET_RELATIONSHIP rame mother
 GET_RELATIONSHIP barsha Maternal-Aunt
+
+
+GET_RELATIONSHIP Laki Maternal-Uncle
+
