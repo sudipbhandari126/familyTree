@@ -5,13 +5,13 @@ import com.sudip.familytree.entities.Person;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryPersonPersistenceTemplate  implements PersonPersistenceProvider{
-    private Map<String,Person> personMap = new HashMap<String,Person>();
+public class InMemoryPersonPersistenceTemplate implements PersonPersistenceProvider {
+    private Map<String, Person> personMap = new HashMap<String, Person>();
 
     @Override
     public Person save(Person person) {
-        synchronized (person){
-            personMap.put(person.getName(),person);
+        synchronized (person) {
+            personMap.put(person.getName(), person);
         }
         return person;
     }

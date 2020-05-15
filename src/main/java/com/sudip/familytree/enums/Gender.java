@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Gender {
-    MALE(1,"Male"),FEMALE(2,"Female");
+    MALE(1, "Male"), FEMALE(2, "Female");
     private Integer ordina;
     private String name;
 
@@ -13,15 +13,16 @@ public enum Gender {
         this.name = name;
     }
 
-    static Map<String,Gender> genderMap;
+    static Map<String, Gender> genderMap;
+
     static {
-        genderMap= new HashMap<>();
+        genderMap = new HashMap<>();
         for (Gender value : Gender.values()) {
-            genderMap.put(value.name,value);
+            genderMap.put(value.name, value);
         }
     }
 
-    public static Gender genderOf(String name){
+    public static Gender genderOf(String name) {
         return genderMap.get(name);
     }
 }

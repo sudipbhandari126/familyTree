@@ -4,6 +4,7 @@ import com.sudip.familytree.enums.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Person {
     private String name;
@@ -43,7 +44,6 @@ public class Person {
     }
 
 
-
     public Person(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
@@ -58,11 +58,11 @@ public class Person {
         this.wife = wife;
     }
 
-    public void setSpouse(Person spouse){
-        if (Gender.MALE.equals(this.gender)){
+    public void setSpouse(Person spouse) {
+        if (Gender.MALE.equals(this.gender)) {
             setWife(spouse);
             spouse.setHusband(this);
-        }else {
+        } else {
             setHusband(spouse);
             spouse.setWife(this);
         }
@@ -79,17 +79,37 @@ public class Person {
         mother.getChildren().add(this);
     }
 
-    public boolean isMale(){
+    public boolean isMale() {
         return Gender.MALE.equals(this.gender);
     }
 
-    public boolean isFemale(){
+    public boolean isFemale() {
         return Gender.FEMALE.equals(this.gender);
     }
 
     @Override
     public String toString() {
         return this.name;
+    }
+
+    //todo: 1. check if circular reference problem is there
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return name.equals(person.name) &&
+                husband.equals(person.husband) &&
+                wife.equals(person.wife) &&
+                gender == person.gender &&
+                children.equals(person.children) &&
+                father.equals(person.father) &&
+                mother.equals(person.mother);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, husband, wife, gender, children, father, mother);
     }
 }
 
