@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class PersonServiceTest {
-    PersonService personService;
+public class FamilyServiceTest {
+    FamilyService familyService;
     PersonPersistenceProvider personPersistenceProvider;
 
     Map<String, RelationShip> relationShipMap;
@@ -23,10 +23,10 @@ public class PersonServiceTest {
     @Before
     public void init() {
         RelationshipFlow relationshipFlow = new RelationshipFlow();
-        personService = new PersonService();
+        familyService = new FamilyService();
         relationShipMap = relationshipFlow.getRelationShipMap();
-        personPersistenceProvider = this.personService.personPersistenceProvider;
-        personService.loadFamilyTree();
+        personPersistenceProvider = this.familyService.personPersistenceProvider;
+        familyService.loadFamilyTree();
     }
 
     @Test
@@ -118,32 +118,32 @@ public class PersonServiceTest {
 
     @Test
     public void childCanBeAddedToMother() {
-        String s = personService.addChild("Krpi", "Pandey", "Female");
+        String s = familyService.addChild("Krpi", "Pandey", "Female");
         assert s.equals("CHILD_ADDITION_SUCCEEDED");
     }
 
     @Test(expected = Exception.class)
     public void childCannotBeAddedToSingleMother() {
-        String s = personService.addChild("Krithi", "Pandey", "Female");
+        String s = familyService.addChild("Krithi", "Pandey", "Female");
         assert s.equals("CHILD_ADDITION_SUCCEEDED");
     }
 
     @Test
     public void childCannotBeAddedToMaleDude() {
-        String s = personService.addChild("Ahit", "Pandey", "Female");
+        String s = familyService.addChild("Ahit", "Pandey", "Female");
         assert s.equals("CHILD_ADDITION_FAILED");
     }
 
     @Test
     public void childCannotBeAddedToNonExistingMember() {
-        String s = personService.addChild("Suresh", "Pandey", "Female");
+        String s = familyService.addChild("Suresh", "Pandey", "Female");
         assert s.equals("PERSON_NOT_FOUND");
     }
 
 
     @Test
     public void addCouple_successful_buildsSpouseRelation() {
-        String s = personService.addCouple("ram", "sita");
+        String s = familyService.addCouple("ram", "sita");
         assert (s.equals("COUPLE_ADDITION_SUCCEEDED"));
     }
 

@@ -1,6 +1,6 @@
 package com.sudip.familytree.operations;
 
-import com.sudip.familytree.service.PersonService;
+import com.sudip.familytree.service.FamilyService;
 
 public class GetRelationshipCommand implements Command {
     private String personName;
@@ -12,7 +12,7 @@ public class GetRelationshipCommand implements Command {
     }
 
     @Override
-    public void execute(PersonService personService) {
-        System.out.println(personService.findByRelation(personName, relationshipName));
+    public void execute(FamilyService familyService) {
+        System.out.println(familyService.findByRelation(personName, relationshipName));
     }
 }

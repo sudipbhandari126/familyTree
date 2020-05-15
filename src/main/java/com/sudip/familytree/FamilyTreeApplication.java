@@ -14,7 +14,10 @@ public class FamilyTreeApplication {
 
     private static void meetTheFamily(String[] args) {
         FileProcessor fileProcessor = new FileProcessor();
-        if (args.length == 0) System.out.println("Please give a valid input file");
+        if (args.length == 0) {
+            System.out.println("Please give a valid input file containing commands");
+            System.exit(-1);
+        }
         String fileName = args[0];
         try {
             fileProcessor.process(fileName);

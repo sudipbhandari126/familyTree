@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class PersonService {
+public class FamilyService {
     /*
     Addition to family tree happens via mother
 
@@ -19,7 +19,7 @@ public class PersonService {
     PersonPersistenceProvider personPersistenceProvider;
     private Map<String, RelationShip> relationShipMap;
 
-    public PersonService() {
+    public FamilyService() {
         personPersistenceProvider = new InMemoryPersonPersistenceTemplate();
         RelationshipFlow relationshipFlow = new RelationshipFlow();
         relationShipMap = relationshipFlow.getRelationShipMap();

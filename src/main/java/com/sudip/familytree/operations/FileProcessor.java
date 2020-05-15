@@ -1,7 +1,7 @@
 package com.sudip.familytree.operations;
 
 import com.sudip.familytree.exceptions.CommandNotFoundException;
-import com.sudip.familytree.service.PersonService;
+import com.sudip.familytree.service.FamilyService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,15 +11,15 @@ import java.util.Objects;
 public class FileProcessor {
 
     public void process(String fileName) throws IOException, CommandNotFoundException {
-        PersonService personService = new PersonService();
-        personService.loadFamilyTree();
+        FamilyService familyService = new FamilyService();
+        familyService.loadFamilyTree();
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new FileReader(fileName));
             String currentLine = null;
             while ((currentLine = bufferedReader.readLine()) != null) {
                 Command command = CommandFactory.getCommand(currentLine.split(" "));
-                command.execute(personService);
+                command.execute(familyService);
             }
         } catch (IOException e) {
             //log

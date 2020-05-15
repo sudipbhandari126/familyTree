@@ -1,7 +1,7 @@
 package com.sudip.familytree.operations;
 
 
-import com.sudip.familytree.service.PersonService;
+import com.sudip.familytree.service.FamilyService;
 
 class AddChildCommand implements Command {
     private String motherName;
@@ -16,8 +16,8 @@ class AddChildCommand implements Command {
 
 
     @Override
-    public void execute(PersonService personService) {
-        System.out.println(personService.addChild(motherName, childName, childGender));
+    public void execute(FamilyService familyService) {
+        System.out.println(familyService.addChild(motherName, childName, childGender));
     }
 }
 
