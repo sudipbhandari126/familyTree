@@ -17,9 +17,6 @@ public class FamilyServiceTest {
 
     Map<String, RelationShip> relationShipMap;
 
-    //todo 1. add tests for happy case, error, corner/edge case, rename the methods
-    //get all uncles (paternal + maternal)
-
     @Before
     public void init() {
         RelationshipFlow relationshipFlow = new RelationshipFlow();

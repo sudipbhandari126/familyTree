@@ -92,7 +92,6 @@ public class Person {
         return this.name;
     }
 
-    //todo: 1. check if circular reference problem is there
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

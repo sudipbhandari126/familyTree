@@ -22,7 +22,6 @@ public class FamilyTreeTest {
     }
 
     @Test
-    //todo 1. showing valid names, 2. showing NONE for non existing (single name, multiple names)
     public void familyTreeShowsNameOfPersonIsSuccess() {
         String names = FamilyTree.getNames(persons);
         assert names.contains("Ram") && names.contains("Sita");
