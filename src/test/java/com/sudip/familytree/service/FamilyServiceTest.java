@@ -30,7 +30,7 @@ public class FamilyServiceTest {
     }
 
     @Test
-    public void fetchRelationForVichExpectedFatherAsKingShan() {
+    public void testFatherelationForVichExpectedKingShan() {
         RelationShip father = relationShipMap.get("father");
         List<Person> lika = father.forPerson(personPersistenceProvider.get("Vich"));
         String s = FamilyTree.getNames(lika);
@@ -39,7 +39,7 @@ public class FamilyServiceTest {
 
 
     @Test
-    public void fetchRelationForSiblings() {
+    public void testSiblingsRelationForDrithaExpectedTrithaAndVritha() {
         RelationShip father = relationShipMap.get("Siblings");
         List<Person> lika = father.forPerson(personPersistenceProvider.get("Dritha"));
         Person tritha = personPersistenceProvider.get("Tritha");
@@ -48,7 +48,7 @@ public class FamilyServiceTest {
     }
 
     @Test
-    public void isMotherTest() {
+    public void testMotherRelationshipForJnkiExpectedChitra() {
         RelationShip father = relationShipMap.get("mother");
         List<Person> lika = father.forPerson(personPersistenceProvider.get("Jnki"));
         String s = FamilyTree.getNames(lika);
@@ -56,7 +56,7 @@ public class FamilyServiceTest {
     }
 
     @Test
-    public void isSisterTest() {
+    public void testSisterRelationshipForAsvaExpectedAtya() {
         RelationShip sister = relationShipMap.get("sister");
         List<Person> lika = sister.forPerson(personPersistenceProvider.get("Asva"));
         String s = FamilyTree.getNames(lika);
@@ -65,7 +65,7 @@ public class FamilyServiceTest {
 
 
     @Test
-    public void isBrotherTest() {
+    public void testBrotherRelationshipForVyasExpectedAsva() {
         RelationShip father = relationShipMap.get("brother");
         List<Person> lika = father.forPerson(personPersistenceProvider.get("Vyas"));
         Person asva = personPersistenceProvider.get("Asva");
@@ -73,7 +73,7 @@ public class FamilyServiceTest {
     }
 
     @Test
-    public void maternalUncleTest() {
+    public void testMaternalUncleRelationshipforLakiExpectedAhit() {
         RelationShip relationShip = relationShipMap.get("Maternal-Uncle");
         List<Person> maternalUncles = relationShip.forPerson(personPersistenceProvider.get("Laki"));
         Person ahit = personPersistenceProvider.get("Ahit");
@@ -82,7 +82,7 @@ public class FamilyServiceTest {
 
 
     @Test
-    public void maternalAuntTest() {
+    public void testMaternalAuntRelationshipForYodhanExpectedTritha() {
         RelationShip relationShip = relationShipMap.get("Maternal-Aunt");
         List<Person> maternalAunts = relationShip.forPerson(personPersistenceProvider.get("Yodhan"));
         Person tritha = personPersistenceProvider.get("Tritha");
@@ -91,7 +91,7 @@ public class FamilyServiceTest {
 
 
     @Test
-    public void sisterInLawTest() {
+    public void testSisterInLawRelationshipForAsvaExpectedKrpi() {
         RelationShip relationShip = relationShipMap.get("Sister-In-Law");
         List<Person> sistersInLaw = relationShip.forPerson(personPersistenceProvider.get("Asva"));
         Person krpi = personPersistenceProvider.get("Krpi");
@@ -100,7 +100,7 @@ public class FamilyServiceTest {
 
 
     @Test
-    public void brotherInLawTest() {
+    public void testBrotherInLawRelationshipForSatvyExpectedVyas() {
         RelationShip relationShip = relationShipMap.get("Brother-In-Law");
         List<Person> brothersInLaw = relationShip.forPerson(personPersistenceProvider.get("Satvy"));
         Person vyas = personPersistenceProvider.get("Vyas");
@@ -109,7 +109,7 @@ public class FamilyServiceTest {
 
 
     @Test
-    public void paternalUncleTest() {
+    public void testPaternalUncleRelationshipForVasaExpectedVyas() {
         RelationShip relationShip = relationShipMap.get("Paternal-Uncle");
         List<Person> paternalUncles = relationShip.forPerson(personPersistenceProvider.get("Vasa"));
         Person vyas = personPersistenceProvider.get("Vyas");
@@ -117,32 +117,32 @@ public class FamilyServiceTest {
     }
 
     @Test
-    public void childCanBeAddedToMother() {
+    public void testChildCanBeAddedToMotherIsSuccess() {
         String s = familyService.addChild("Krpi", "Pandey", "Female");
         assert s.equals("CHILD_ADDITION_SUCCEEDED");
     }
 
     @Test(expected = Exception.class)
-    public void childCannotBeAddedToSingleMother() {
+    public void testChildCannotBeAddedToSingleMotherThrowsException() {
         String s = familyService.addChild("Krithi", "Pandey", "Female");
         assert s.equals("CHILD_ADDITION_SUCCEEDED");
     }
 
     @Test
-    public void childCannotBeAddedToMaleDude() {
+    public void testChildCannotBeAddedToMaleReturnsErrorMessage() {
         String s = familyService.addChild("Ahit", "Pandey", "Female");
         assert s.equals("CHILD_ADDITION_FAILED");
     }
 
     @Test
-    public void childCannotBeAddedToNonExistingMember() {
+    public void testChildCannotBeAddedToNonExistingMemberThrowsErrorCode() {
         String s = familyService.addChild("Suresh", "Pandey", "Female");
         assert s.equals("PERSON_NOT_FOUND");
     }
 
 
     @Test
-    public void addCouple_successful_buildsSpouseRelation() {
+    public void testAddCoupleRelationShipReturnsSuccessMessage() {
         String s = familyService.addCouple("ram", "sita");
         assert (s.equals("COUPLE_ADDITION_SUCCEEDED"));
     }
