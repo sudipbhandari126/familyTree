@@ -147,5 +147,12 @@ public class FamilyServiceTest {
         assert (s.equals("COUPLE_ADDITION_SUCCEEDED"));
     }
 
+    @Test
+    public void testFatherRelationshipForKingShanReturnsNone(){
+        RelationShip relationShip = relationShipMap.get("father");
+        List<Person> father = relationShip.forPerson(personPersistenceProvider.get("King Shan"));
+        assert FamilyTree.getNames(father).equals("NONE");
+    }
+
 
 }
